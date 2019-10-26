@@ -57,9 +57,13 @@
 
             },
             addCredit = function(incrementCredits){
+                return initCredit(credits + incrementCredits);
+            },
+            initCredit = function(newCredits) {
 
                 var currentCredits = credits;
-                    credits += incrementCredits;
+                var incrementCredits = newCredits - credits;
+                credits = newCredits;
 
                 blink($('#slot-credits'));
 
@@ -82,7 +86,6 @@
 
                         }
                     });
-
             },
             spin = function(){
 
@@ -230,8 +233,16 @@
                 $('#wheel2 img:first').css('top', - (parseInt(Math.random() * 23) * 44) + 'px');
                 $('#wheel3 img:first').css('top', - (parseInt(Math.random() * 23) * 44) + 'px');
 
+            },
+            initCredit: initCredit,
+            reset: function(){
+                if ($('#resetPassword').val() === 'captainCasino3'){
+                    $('#resetPassword').val('')
+                    var money = window.prompt('Initialiser à :');
+                    console.log(parseInt(money))
+                    initCredit(parseInt(money));
+                }
             }
-
         };
     }();
 
@@ -260,7 +271,8 @@
     });
 
     $(document).ready(slotMachine.init);
-
+    slotMachine.initCredit(0);
+    $(document).on('click', function(){slotMachine.reset()});
 })(jQuery);
 
 function blink(element){
