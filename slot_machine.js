@@ -243,7 +243,6 @@
                 if ($('#resetPassword').val() === 'captainCasino3'){
                     $('#resetPassword').val('')
                     var money = window.prompt('Initialiser à :');
-                    console.log(parseInt(money))
                     initCredit(parseInt(money));
                 }
             }
@@ -281,9 +280,13 @@
     $(function(){
         $controls = $('#controls');
         $controls.hide();
+        $trigger = $('#slot-trigger');
         $(document).keypress(function(event) {
             if(event.originalEvent.code == 'KeyB') {
                 $controls.toggle();
+            } else if(event.originalEvent.code == 'Space') {
+                $trigger.trigger('mousedown');
+                $trigger.trigger('click');
             }
         });
     });
