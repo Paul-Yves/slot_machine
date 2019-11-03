@@ -88,6 +88,10 @@
                     });
             },
             spin = function(){
+                if(credits <= 0) {
+                    alert('Appelez le croupier');
+                    return;
+                }
 
                 this.blur();
 
@@ -273,6 +277,17 @@
     $(document).ready(slotMachine.init);
     slotMachine.initCredit(0);
     $(document).on('click', function(){slotMachine.reset()});
+
+    $(function(){
+        $controls = $('#controls');
+        $controls.hide();
+        $(document).keypress(function(event) {
+            if(event.originalEvent.code == 'KeyB') {
+                $controls.toggle();
+            }
+        });
+    });
+
 })(jQuery);
 
 function blink(element){
