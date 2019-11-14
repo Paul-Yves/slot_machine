@@ -7,6 +7,17 @@
 
 (function($){
 
+String.prototype.hashCode = function() {
+  var hash = 0, i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr   = this.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
     var slotMachine = function(){
 
         var credits = 15,
@@ -240,7 +251,7 @@
             },
             initCredit: initCredit,
             reset: function(){
-                if ($('#resetPassword').val() === 'captainCasino3'){
+                if ($('#resetPassword').val().hashCode() === -694968926){
                     $('#resetPassword').val('')
                     var money = window.prompt('Initialiser à :');
                     initCredit(parseInt(money));
@@ -282,7 +293,7 @@
         $controls.hide();
         $trigger = $('#slot-trigger');
         $(document).keypress(function(event) {
-            if(event.originalEvent.code == 'KeyB') {
+            if(event.originalEvent.code == 'KeyB' && event.originalEvent.shiftKey == true) {
                 $controls.toggle();
             } else if(event.originalEvent.code == 'Space') {
                 $trigger.trigger('mousedown');
