@@ -14,14 +14,14 @@
             spin = [0,0,0],
             slotsTypes = {
                 'cherry': [2,5,10],
-                'orange': [0,15,30],
-                'prune': [0,40,50],
-                'bell': [0,50,80],
+                'orange': [0,8,20],
+                'prune': [0,10,40],
+                'bell': [0,15,60],
                 'bar1': [0,0,100],
                 'bar2': [0,0,150],
                 'bar3': [0,0,250],
                 'seven': [0,0,500],
-                'anybar': [0,0,80]
+                'anybar': [0,0,30]
             },
             slots = [
                 ['orange','bell','orange','bar2','prune','orange',
