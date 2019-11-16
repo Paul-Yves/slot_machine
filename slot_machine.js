@@ -31,10 +31,10 @@
             spinAudio = new Audio('spin.wav');
             spin = [0,0,0],
             slotsTypes = {
-                'cherry': [2,5,10],
-                'orange': [0,8,20],
-                'prune': [0,10,40],
-                'bell': [0,15,60],
+                'cherry': [1,3,10],
+                'orange': [0,5,20],
+                'prune': [0,8,40],
+                'bell': [0,10,60],
                 'bar1': [0,0,100],
                 'bar2': [0,0,150],
                 'bar3': [0,0,250],
