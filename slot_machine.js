@@ -7,21 +7,28 @@
 
 (function($){
 
-String.prototype.hashCode = function() {
-  var hash = 0, i, chr;
-  if (this.length === 0) return hash;
-  for (i = 0; i < this.length; i++) {
-    chr   = this.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
-    hash |= 0; // Convert to 32bit integer
-  }
-  return hash;
-};
+    String.prototype.hashCode = function() {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr   = this.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+    };
+
+    var endAudio = function(audio, count) {
+        if (count >= 3) {
+            audio.pause();
+        }
+    }
 
     var slotMachine = function(){
 
         var credits = 15,
             spinning = 3,
+            spinAudio = new Audio('spin.wav');
             spin = [0,0,0],
             slotsTypes = {
                 'cherry': [2,5,10],
@@ -108,6 +115,13 @@ String.prototype.hashCode = function() {
 
                 if(spinning == false){
 
+                    var audioStart = new Audio('start-0.wav');
+                    spinAudio.loop = true;
+                    audioStart.addEventListener('ended', function(){
+                        spinAudio.play();
+                    });
+                    audioStart.play();
+
                     $('#slot-machine .arm').animate({ top: '45px', height: '2%' });
                     $('#slot-machine .arm .knob').animate({ top: '-20px', height: '20px' });
                     $('#slot-machine .arm-shadow').animate({ top: '40px' }, 380);
@@ -178,7 +192,7 @@ String.prototype.hashCode = function() {
                     });
             },
             endSpin = function(){
-
+                spinAudio.pause();
                 var slotType = slots[0][spin[0]],
                     matches = 1,
                     barMatch = /bar/.test(slotType) ? 1 : 0,
@@ -213,8 +227,14 @@ String.prototype.hashCode = function() {
                 var winnedCredits = slotsTypes[slotType][matches-1];
 
                 if(winnedCredits > 0){
+                    var sound = winnedCredits >= 100 ? 'payoff.wav' : 'coinsl3.wav'
+                    var audio = new Audio(sound);
+                    audio.play();
                     addCredit(winnedCredits);
                     waitToSpin = 410 + winnedCredits;
+                } else {
+                    var audio = new Audio('stop-0.wav');
+                    audio.play();
                 }
 
                 setTimeout(function(){
