@@ -306,7 +306,7 @@
 
     $(document).ready(slotMachine.init);
     slotMachine.initCredit(0);
-    $(document).on('click', function(){slotMachine.reset()});
+    $(document).on('click', '#reset',function(){slotMachine.reset()});
 
     $(function(){
         $controls = $('#controls');
