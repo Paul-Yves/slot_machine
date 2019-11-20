@@ -273,7 +273,7 @@
             reset: function(){
                 if ($('#resetPassword').val().hashCode() === -694968926){
                     $('#resetPassword').val('')
-                    var money = window.prompt('Initialiser à :');
+                    var money = window.prompt('Initialiser de ' + credits + ' à :');
                     initCredit(parseInt(money));
                 }
             }
