@@ -1,0 +1,1 @@
+<?php include_once("slot_machine.html"); ?>
